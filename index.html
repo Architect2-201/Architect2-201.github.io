@@ -43,6 +43,59 @@
   </nav>
 </header>
 
+  <header>
+  <nav class="navbar">
+    <a href="index.html">მთავარი</a>
+    <a href="shop.html">Shop</a>
+    <a href="https://www.instagram.com" target="_blank">Instagram</a>
+    <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+  </nav>
+</header>
+
+<style>
+body { margin:0; font-family:'Segoe UI', sans-serif; }
+.navbar {
+  background:#1e1e1e;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding:1rem;
+  flex-wrap: wrap;
+  position: relative;
+}
+.navbar a {
+  color:white;
+  text-decoration:none;
+  margin:0 15px;
+  font-weight:600;
+  transition:0.3s;
+}
+.navbar a:hover { color:#00aaff; }
+.nav-toggle {
+  display:none;
+  background:#0077ff;
+  border:none;
+  color:white;
+  font-size:1.5rem;
+  padding:0.2rem 0.6rem;
+  border-radius:6px;
+  cursor:pointer;
+  margin-left: auto;
+}
+@media (max-width:768px){
+  .navbar a { display:none; width:100%; text-align:center; margin:10px 0; }
+  .nav-toggle { display:block; }
+  .navbar.active a { display:block; }
+}
+</style>
+
+<script>
+function toggleMenu() {
+  document.querySelector('.navbar').classList.toggle('active');
+}
+</script>
+
+
 <style>
   header {
     background: #1e1e1e;

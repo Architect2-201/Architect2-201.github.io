@@ -128,3 +128,89 @@
   </footer>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architect AI Resources | Shop</title>
+<style>
+body { font-family:'Segoe UI', sans-serif; background:#f5f5f5; margin:0; padding:0; }
+.navbar { background:#1e1e1e; display:flex; justify-content:center; align-items:center; padding:1rem; flex-wrap:wrap; position:relative; }
+.navbar a { color:white; text-decoration:none; margin:0 15px; font-weight:600; transition:0.3s; }
+.navbar a:hover { color:#00aaff; }
+.nav-toggle { display:none; background:#0077ff; border:none; color:white; font-size:1.5rem; padding:0.2rem 0.6rem; border-radius:6px; cursor:pointer; margin-left:auto; }
+@media (max-width:768px){ .navbar a { display:none; width:100%; text-align:center; margin:10px 0; } .nav-toggle { display:block; } .navbar.active a { display:block; } }
+.container { max-width:1100px; margin:2rem auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; padding:0 1rem; }
+.item { background:white; border-radius:12px; box-shadow:0 3px 8px rgba(0,0,0,0.1); padding:1rem; text-align:center; transition:0.3s; }
+.item:hover { transform:translateY(-4px); }
+.item img { width:100%; border-radius:10px; }
+.item h2 { font-size:1.2rem; margin:0.5rem 0; }
+.item p { color:#555; font-size:0.9rem; }
+input[type=number] { width:60px; padding:5px; margin-top:5px; }
+.btn { display:inline-block; background:#0077ff; color:white; padding:0.5rem 1rem; border-radius:8px; text-decoration:none; cursor:pointer; margin-top:0.5rem; border:none; }
+.btn:hover { background:#005cd4; }
+</style>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+const stripe = Stripe('pk_test_შენი_PUBLIC_KEY'); // შეცვალე შენი PUBLIC_KEY
+
+function checkout(priceId, quantity) {
+  fetch('https://your-server.com/create-checkout-session', { // შეცვალე შენი server URL
+    method:'POST',
+    headers:{ 'Content-Type':'application/json' },
+    body: JSON.stringify({ priceId: priceId, quantity: quantity })
+  })
+  .then(res=>res.json())
+  .then(session => { stripe.redirectToCheckout({ sessionId: session.id }); })
+  .catch(err=>console.error(err));
+}
+
+function toggleMenu() { document.querySelector('.navbar').classList.toggle('active'); }
+</script>
+</head>
+<body>
+<header>
+  <nav class="navbar">
+    <a href="index.html">მთავარი</a>
+    <a href="shop.html">Shop</a>
+    <a href="https://www.instagram.com" target="_blank">Instagram</a>
+    <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+  </nav>
+</header>
+
+<div class="container">
+  <!-- პროდუქტი 1 -->
+  <div class="item">
+    <img src="https://i.imgur.com/0Kz2z3V.jpg" alt="Template">
+    <h2>AI Template for Architects</h2>
+    <p>Notion შაბლონი არქიტექტორებისთვის – AI ინტეგრაციით</p>
+    <label for="quantity1">რაოდენობა:</label>
+    <input type="number" id="quantity1" value="1" min="1" max="10">
+    <button class="btn" onclick="checkout('price_12345', document.getElementById('quantity1').value)">იყიდე ახლა</button>
+  </div>
+
+  <!-- პროდუქტი 2 -->
+  <div class="item">
+    <img src="https://i.imgur.com/dV3zZtR.jpg" alt="Guide">
+    <h2>Revit + AI Workflow Guide</h2>
+    <p>PDF სახელმძღვანელო როგორ გამოიყენო AI პროექტირებაში</p>
+    <label for="quantity2">რაოდენობა:</label>
+    <input type="number" id="quantity2" value="1" min="1" max="10">
+    <button class="btn" onclick="checkout('price_67890', document.getElementById('quantity2').value)">იყიდე ახლა</button>
+  </div>
+
+  <!-- პროდუქტი 3 -->
+  <div class="item">
+    <img src="https://i.imgur.com/QjQn3mL.jpg" alt="Prompt Pack">
+    <h2>Architectural AI Prompt Pack</h2>
+    <p>საუკეთესო 50 prompt არქიტექტურული ვიზუალიზაციისთვის</p>
+    <label for="quantity3">რაოდენობა:</label>
+    <input type="number" id="quantity3" value="1" min="1" max="10">
+    <button class="btn" onclick="checkout('price_ABCDE', document.getElementById('quantity3').value)">იყიდე ახლა</button>
+  </div>
+</div>
+</body>
+</html>
+
